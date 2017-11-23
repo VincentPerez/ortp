@@ -1025,6 +1025,7 @@ ortp_socket_t rtp_session_get_socket(RtpSession *session, bool_t is_rtp){
 int _ortp_sendto(ortp_socket_t sockfd, mblk_t *m, int flags, const struct sockaddr *destaddr, socklen_t destlen){
 	int error;
 #ifdef USE_SENDMSG
+	connect(sockfd, destaddr, destlen);
 	error=rtp_sendmsg(sockfd,m,destaddr,destlen);
 #else
 	if (m->b_cont!=NULL)
